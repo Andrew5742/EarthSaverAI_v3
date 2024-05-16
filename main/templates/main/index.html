@@ -1,0 +1,423 @@
+<!--developed by paraqueet-->
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{% static 'main/css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'main/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'main/style.css' %}">
+</head>
+
+<body>
+    <!--NAVBAR-->
+    <nav class="navbar navbar-dark">
+        <a class="btn fa-solid fa-bars" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button"
+           aria-controls="offcanvasExample">
+
+        </a>
+        <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+            <div class="offcanvas-header">
+                <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+                <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                    <li class="nav-item" style="font-family: Arimo; color: #252F26;">
+                        <a class="nav-link active text-dark" style="font-family: Arimo; color: #252F26; font-size: 15px;"
+                           aria-current="page" href="#project-overview">Project
+                            Overview</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" style="font-family: Arimo; color: #252F26; font-size: 15px;"
+                           href="#our-team">Our Team</a>
+                    </li>
+                    <li class="nav-item">
+                        <div class="dropdown">
+                            <button class="btn dropdown-toggle nav-link" type="button" data-toggle="dropdown"
+                                    style="font-family: Arimo; color: #252F26; font-size: 15px; box-shadow: 0 0 0 .25rem rgba(255, 255, 255, 0.25);">
+                                Documentation
+                                <span class="caret"></span></button>
+                            <ul class="dropdown-menu" style="border: 0px; font-family: Arimo; color: #252F26;">
+                                <li style="font-family: Arimo; color: #252F26;"><a href="https://drive.google.com/file/d/17v2Umo8QMGxeLTSWC5DhGcLUZFbGnZmv/view?usp=sharing">Technical Documentation</a></li>
+                                <li style="font-family: Arimo; color: #252F26;"><a href="https://drive.google.com/file/d/1-gzsrL9yYZTBmfY46OZdM3hbPduAzxn-/view?usp=sharing">Ethics & Responsibility</a></li>
+                                <li style="font-family: Arimo; color: #252F26;"><a href="https://drive.google.com/file/d/1m7a6sqe9vh8A0kettJ3c_1pZ91YbPTQo/view?usp=sharing">Licensing & Contribution</a>
+                                </li>
+                                <!--<li style="font-family: Arimo; color: #252F26;"><a href="#">Privacy Policy</a></li>-->
+                                <!--<li style="font-family: Arimo; color: #252F26;"><a href="#">Terms & Conditions</a></li>-->
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" style="font-family: Arimo; color: #252F26; font-size: 15px;"
+                           href="#contact-us">Contact Us</a>
+                    </li>
+                </ul>
+
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <li><a class="dropdown-item" href="#">Action</a></li>
+                    <li><a class="dropdown-item" href="#">Another action</a></li>
+                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!--END NAVBAR -->
+    <!--WELCOME-->
+    <div class="screen">
+        <div class="top-box">
+            <div class="content-left">
+                <div class="content-left--inner">
+                    <h1>Welcome to EarthSaverAI!</h1>
+                    <p class="sub-text">See how the temperature of the Earth's surface will change</p>
+
+                    <form action="{% url 'plot_predicted_data' %}" method="POST">
+                    <div class="select-wrapper">
+                        {% csrf_token %}
+                            <label for="country" class="label">Select Country</label>
+                            <select name="country" id="country" class="form-control">
+                            {% for country_name in country_names %}
+                                    <option value="{{ country_name }}">{{ country_name }}</option>
+                                {% endfor %}
+                            </select>
+                    </div>
+                    <div class="select-wrapper">
+                        <label for="year" class="label">Select Year</label>
+                        <select name="year" id="year" class="form-control">
+                            {% for year in years %}
+                                <option value="{{ year }}">{{ year }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <button class="btn-submit" value="Submit">Submit</button>
+
+                    </form>
+                </div>
+            </div>
+
+            <div class="carousel-container ">
+                <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active ">
+                            <img src="{% static 'main/img/slider/img2.webp' %}" alt="...">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="{% static 'main/img/slider/img3.webp' %}" alt="...">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="{% static 'main/img/slider/img4.webp' %}" alt="...">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="{% static 'main/img/slider/img1.webp' %}" alt="...">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--END WELCOME-->
+    <!--OVERVIEW-->
+    <div class="screen section-full p-t80 p-b50 overlay-wraper bg-top-center bg-parallax"
+         data-stellar-background-ratio="0.5"
+         style="background-image:url({% static 'main/img/background-min.png' %});" id="project-overview">
+        <div class="overlay-main opacity-08 bg-black"></div>
+        <div class="overview">
+            <div class="overview--inner">
+                <h2>Project overview</h2>
+                <p>
+                    Our project “EarthSaver AI” relates to the environment track and is dedicated to the
+                    study of
+                    climate change using artificial intelligence and machine learning methods. Our goal is to
+                    develop AI
+                    solution that supports environmental sustainability and addresses climate change challenges.
+                    The topic
+                    of our research is determined to Sustainable Development Goals (SDGs) provided by United
+                    Nations (UN)
+                    and adopted by all UN Member States in 2015. Referring to SDG 13 climate change is a real
+                    and undeniable
+                    threat to our entire civilization.
+                </p>
+                <br>
+                <div id="additionalText" style="display: none;">
+                    <p>Policymakers,
+                        planners, investors and vulnerable communities need
+                        information about future climate so that they can prepare for expected trends and
+                        changes. The main
+                        purpose of our idea is to develop an AI model to predict temperature changes in
+                        different regions of
+                        the Earth, trace dependencies and select machine learning models for different climate
+                        zones to
+                        achieve the highest efficiency of the model. The model is supposed to be trained on
+                        datasets with a
+                        Creative Commons license.</p>
+                </div>
+                <a class="btn-half site-button button-lg m-b15"
+                   id="readMoreBtn"
+                   onclick="showMoreText()"><span>Read More</span><em></em></a>
+            </div>
+        </div>
+    </div>
+    <!--END OVERVIEW-->
+    <!--OUR TEAM-->
+    <div class="team" id="our-team">
+        <h2>Our team</h2>
+        <div class="team__content">
+            <div class="team__text">
+                <p> EcoMind Innovators is a team from
+                    Khmelnytskyi National University (Khmelnytskyi city, Ukraine). <br><br> We
+                    are students who are not indifferent to the current problems of our planet. Driven by the goal
+                    of
+                    change towards a better future for humanity, we decided to join GRAILS. Our team consists of
+                    four
+                    members and two faculty advisors.
+                </p>
+            </div>
+
+            <div class="m-carousel-1 team__carousel">
+                <div class="owl-carousel home-carousel-1 owl-btn-vertical-center">
+                    <!-- COLUMNS 1 -->
+                    <div class="item">
+                        <div class="ow-img wt-img-effect zoom-slow">
+                            <a href="#"><img src="{% static 'main/img/slider/slide1.webp' %}" alt=""></a>
+                        </div>
+                    </div>
+                    <!-- COLUMNS 2 -->
+                    <div class="item">
+                        <div class="ow-img wt-img-effect zoom-slow">
+                            <a href="#"><img src="{% static 'main/img/slider/slide2.webp' %}" alt=""></a>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="ow-img wt-img-effect zoom-slow">
+                            <a href="#"><img src="{% static 'main/img/slider/slide3.webp' %}" alt=""></a>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="ow-img wt-img-effect zoom-slow">
+                            <a href="#"><img src="{% static 'main/img/slider/slide4.webp' %}" alt=""></a>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="ow-img wt-img-effect zoom-slow">
+                            <a href="#"><img src="{% static 'main/img/slider/slide5.webp' %}" alt=""></a>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="ow-img wt-img-effect zoom-slow">
+                            <a href="#"><img src="{% static 'main/img/slider/slide6.webp' %}" alt=""></a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+    <!--END OUR TEAM-->
+    <!--MEMBERS-->
+    <div class="members">
+        <h2>Team members</h2>
+        <div class="members__content">
+            <div class="members__card">
+                <div class="members__image-wrapper">
+                    <img class="members__image" src="{% static 'main/img/members/Vitalii Alekseiko.jpg' %}">
+                </div>
+                <div class="members__title">Vitalii Alekseiko</div>
+                <div class="members__subtitle">Team Leader <br>
+                    2nd year Master Student <br>
+                    majoring in Computer Engineering
+                </div>
+                <div class="social-icons">
+                    <a href="https://scholar.google.com/citations?user=tVNesMAAAAAJ&hl=en" target="_blank">
+                        <i class="fa-brands fa-google-scholar"></i>
+                    </a>
+                    <a href=" https://www.facebook.com/profile.php?id=100009377184577" target="_blank">
+                        <i class="fa-brands fa-facebook"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/in/vitalii-alekseiko-896b64309/" target="_blank">
+                        <i class="fa-brands fa-linkedin"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="members__card">
+                <div class="members__image-wrapper">
+                    <img class="members__image" src="{% static 'main/img/members/ValeriiaShvaiko-min.jpg' %}">
+                </div>
+                <div class="members__title">Valeriia Shvaiko</div>
+                <div class="members__subtitle">Data Analyst, Technical Writer, Ethicist <br>
+                    4th year Bachelor student
+                    majoring Computer Engineering
+                </div>
+                <div class="social-icons">
+                    <a href="https://scholar.google.com.ua/citations?view_op=list_works&hl=uk&authuser=1&user=y8KjjRQAAAAJ"
+                       target="_blank">
+                        <i class="fa-brands fa-google-scholar"></i>
+                    </a>
+                    <a href="https://www.facebook.com" target="_blank">
+                        <i class="fa-brands fa-facebook"></i>
+                    </a>
+                    <a href="https://www.linkedin.com" target="_blank">
+                        <i class="fa-brands fa-linkedin"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="members__card">
+                <div class="members__image-wrapper">
+                    <img class="members__image" src="{% static 'main/img/members/AndriiKuzmin-min.jpg' %}">
+                </div>
+                <div class="members__title">Andrii Kuzmin</div>
+                <div class="members__subtitle">
+                    UX/UI Designer, Digital Content Maker <br>
+                    1st year Master student
+                    majoring Computer Engineering
+                </div>
+                <div class="social-icons">
+                    <a href="https://scholar.google.com.ua/citations?view_op=list_works&hl=uk&user=A5eEh3IAAAAJ"
+                       target="_blank">
+                        <i class="fa-brands fa-google-scholar"></i>
+                    </a>
+                    <a href="https://www.facebook.com/people/Andrii-Kuzmin/pfbid02ymi5TnQcPAsAfj4VtiKdtvhKYmrgHdBWhrT3HWkVWQrMARSw3ZfMNM9izV7Q6eBVl/?locale=uk_UA"
+                       target="_blank">
+                        <i class="fa-brands fa-facebook"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/in/%D0%B0%D0%BD%D0%B4%D1%80%D1%96%D0%B9-%D0%BA%D1%83%D0%B7%D1%8C%D0%BC%D1%96%D0%BD-8a22a2293/ "
+                       target="_blank">
+                        <i class="fa-brands fa-linkedin"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="members__card">
+                <div class="members__image-wrapper">
+                    <img class="members__image" src="{% static 'main/img/members/JuliiaIlchyshyna-min.jpg' %}">
+                </div>
+                <div class="members__title">Juliia ilchyshyna</div>
+                <div class="members__subtitle">UX/UI Designer <br>
+                    4th year Bachelor student
+                    majoring Computer Engineering
+                </div>
+                <div class="social-icons">
+                    <a href="https://scholar.google.com.ua/schhp?hl=uk" target="_blank">
+                        <i class="fa-brands fa-google-scholar"></i>
+                    </a>
+                    <a href="https://www.facebook.com" target="_blank">
+                        <i class="fa-brands fa-facebook"></i>
+                    </a>
+                    <a href="https://www.linkedin.com" target="_blank">
+                        <i class="fa-brands fa-linkedin"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--END MEMBERS-->
+    <!--ADVISOR-->
+    <div class="members">
+        <h2>Faculty Advisors</h2>
+        <div class="members__content">
+            <div class="members__card members__card--horizontal">
+                <div class="members__horizontal">
+                    <div class="members__image-wrapper members__image-wrapper--hor">
+                        <img class="members__image" src="{% static 'main/img/members/OlhaPavlova-min.jpg' %}">
+                    </div>
+                    <div class="members__horizontal--text">
+                        <div class="members__title members__title--hor">Olha Pavlova</div>
+                        <div class="members__subtitle members__subtitle--hor">PhD, Associate Professor of <br> Computer Engineering and <br> Information
+                            Systems Department <br>
+                            Khmelnytskyi National University
+                        </div>
+                    </div>
+                </div>
+                <div class="social-icons">
+                    <a href="https://scholar.google.com.ua/citations?user=sQfkv30AAAAJ&hl=uk&authuser=1" target="_blank">
+                        <i class="fa-brands fa-google-scholar"></i>
+                    </a>
+                    <a href="https://www.facebook.com/olya.pavlova.737" target="_blank">
+                        <i class="fa-brands fa-facebook"></i>
+                    </a>
+                    <a href="https://www.linkedin.com" target="_blank">
+                        <i class="fa-brands fa-linkedin"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="members__card members__card--horizontal">
+                <div class="members__horizontal">
+                    <div class="members__image-wrapper members__image-wrapper--hor">
+                        <img class="members__image" src="{% static 'main/img/members/YehorIshtvan-min.jpg' %}">
+                    </div>
+                    <div class="members__horizontal--text">
+                        <div class="members__title members__title--hor">Yehor Ishtvan</div>
+                        <div class="members__subtitle members__subtitle--hor"> Senior Lecturer, <br>
+                             Computer Engineering and Information Systems Department, <br>
+                            Khmelnytskyi National University
+                        </div>
+                    </div>
+                </div>
+                <div class="social-icons">
+                    <a href="https://scholar.google.com.ua/citations?hl=uk&user=vkpOj4kAAAAJ" target="_blank">
+                        <i class="fa-brands fa-google-scholar"></i>
+                    </a>
+                    <a href="https://www.facebook.com/yehor.ishtvan" target="_blank">
+                        <i class="fa-brands fa-facebook"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/in/yehor-ishtvan-6580a2aa/" target="_blank">
+                        <i class="fa-brands fa-linkedin"></i>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!--END ADVISOR-->
+    <!--FOOTER-->
+    <footer class="footer" id="contact-us">
+        <div class="footer__inner">
+            <div class="footer__left">
+                <h2>EarthSaverAI</h2>
+                <ul class="footer__nav">
+                    <li class="footer__nav-item"><a href="#project-overview">About Project</a></li>
+                    <li class="footer__nav-item"><a href="#our-team">Our Team</a></li>
+                    <!--<li class="footer__nav-item"><a href="#">Privacy & Policy</a></li>-->
+                    <!--<li class="footer__nav-item"><a href="#">Terms & Conditions</a></li>-->
+                </ul>
+            </div>
+            <div class="footer__right">
+                <h3>Contact US</h3>
+                <a href="mailto:ecomindinnovators@ukr.net">ecomindinnovators@ukr.net</a>
+            </div>
+        </div>
+        <div class="footer__text">All rights reserved. © 2024</div>
+    </footer>
+    <!--END FOOTER-->
+</body>
+<script>
+    function showMoreText() {
+        var additionalText = document.getElementById("additionalText");
+        var readMoreBtn = document.getElementById("readMoreBtn");
+        if (additionalText.style.display === "none") {
+            additionalText.style.display = "block";
+            readMoreBtn.innerText = "Show less"
+        } else {
+            additionalText.style.display = "none";
+            readMoreBtn.innerText = "Read more"
+        }
+    }
+
+</script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+        integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+        crossorigin="anonymous"></script>
+<!--<script src="{%static '../assets/dist/js/bootstrap.bundle.min.js'%}"></script>-->
+<script src="https://kit.fontawesome.com/60ddfe0005.js" crossorigin="anonymous"></script>
+<script src="{%static 'main/js/magnific-popup.min.js'%}"></script>
+<script src="{%static 'main/js/owl.carousel.min.js'%}"></script>
+<script src="{%static 'main/js/custom.js'%}"></script>
+</html>
